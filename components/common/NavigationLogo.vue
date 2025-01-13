@@ -1,17 +1,16 @@
 <template>
   <div :class="$style.logoWrapper">
     <nuxt-img src="/logo.svg" :class="$style.imgLogo" />
-    <nuxt-img src="/SmartGuru.svg" :class="[$style.imgLogo, $style.mobileTextNone]" />
+    <p :class="$style.logoTitle">Церковь</p>
   </div>
 </template>
 <script setup lang="ts"></script>
 <style lang="scss" module>
 .logoWrapper {
-  display: grid;
-  grid-template-columns: 8.9rem 15.7rem;
-  grid-template-rows: 1fr;
-  align-items: start;
-  gap: 1.3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
   height: 8.4rem;
   margin-bottom: 5rem;
@@ -32,13 +31,12 @@
 .imgLogo {
   display: flex;
   align-items: start;
-  width: 100%;
   height: 100%;
 }
 
-.mobileTextNone {
-  @include respond-to(mobile) {
-    display: none;
-  }
+.logoTitle {
+  font-size: 3rem;
+  line-height: 3.4rem;
+  font-weight: 700;
 }
 </style>

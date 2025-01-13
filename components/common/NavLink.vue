@@ -45,7 +45,7 @@ const classList = computed(() => [
 .navLinkWrapper {
   display: flex;
   align-items: center;
-  border-radius: 0.5rem;
+  border-radius: 3rem;
   outline: 1px solid transparent;
 
   &._transparentBorder {
@@ -88,17 +88,16 @@ const classList = computed(() => [
   }
 
   &._activeLink {
-    background-color: $orange;
+    background-color: $light-blue;
 
     .navLink {
       .navImg {
-        filter: invert(93%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(110%)
-          contrast(100%);
+        filter: brightness(0) saturate(100%) invert(18%) sepia(28%) saturate(5170%) hue-rotate(199deg) brightness(99%) contrast(107%);
       }
     }
 
     .navTitle {
-      color: $white;
+      color: $dark-blue;
     }
   }
 }
@@ -111,7 +110,8 @@ const classList = computed(() => [
   padding: 1.5rem;
 
   .navImg {
-    height: 100%;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 
   @include respond-to(tablet) {
@@ -120,11 +120,6 @@ const classList = computed(() => [
     justify-content: center;
     padding: 1rem;
     gap: 0.5rem;
-
-    .navImg {
-      width: 2.4rem;
-      height: 2.4rem;
-    }
   }
 
   .navTitle {

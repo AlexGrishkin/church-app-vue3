@@ -10,9 +10,6 @@
         size="base"
       />
     </div>
-    <div :class="$style.navLinkBottom">
-      <nav-link :link-data="NAVIGATION_CONFIG_BOTTOM" data-allow-mismatch size="base" />
-    </div>
   </div>
 </template>
 
@@ -27,36 +24,35 @@ defineOptions({
 const NAVIGATION_CONFIG = [
   {
     link: '/',
-    title: 'Каталог',
-    imgSrc: '/catalog.svg',
+    title: 'Главная',
+    imgSrc: '/main.svg',
     id: '1',
   },
   {
-    link: '/entries',
-    title: 'Записи',
-    imgSrc: '/entries.svg',
+    link: '/personal',
+    title: 'Личный кабинет',
+    imgSrc: '/Personal.svg',
     id: '2',
   },
   {
-    link: '/certificates',
-    title: 'Сертификаты',
-    imgSrc: '/certificates.svg',
+    link: '/events',
+    title: 'Мероприятия',
+    imgSrc: '/Events.svg',
     id: '3',
   },
   {
-    link: '/reviews',
-    title: 'Отзывы',
-    imgSrc: '/reviews.svg',
+    link: '/institutions',
+    title: 'Учреждения',
+    imgSrc: '/Institutions.svg',
     id: '4',
   },
+  {
+    link: '/news',
+    title: 'Новости',
+    imgSrc: '/News.svg',
+    id: '5',
+  },
 ];
-
-const NAVIGATION_CONFIG_BOTTOM = {
-  link: '/settings',
-  title: 'Настройки',
-  imgSrc: '/Setting.svg',
-  id: '5',
-};
 </script>
 
 <style module lang="scss">
@@ -64,16 +60,12 @@ const NAVIGATION_CONFIG_BOTTOM = {
   position: sticky;
   top: 0;
   display: flex;
-  width: 30rem;
+  width: 32rem;
   height: 100vh;
   padding: 3rem 2rem;
   flex-direction: column;
   border-right: 2px solid $grey;
   background-color: $white;
-
-  @include respond-to(desktop) {
-    width: 23.7rem;
-  }
 
   @include respond-to(tablet) {
     position: fixed;
@@ -106,14 +98,6 @@ const NAVIGATION_CONFIG_BOTTOM = {
 
   @include respond-to(mobile) {
     height: 100%;
-  }
-}
-
-.navLinkBottom {
-  margin-top: auto;
-
-  @include respond-to(tablet) {
-    display: none;
   }
 }
 </style>

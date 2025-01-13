@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h1>Settings</h1>
+    <h1>Events</h1>
   </div>
 </template>
 
-<script setup lang="ts"></script>
 <style lang="scss">
 h1 {
   @include Title;
