@@ -64,8 +64,7 @@ const NAVIGATION_CONFIG = [
   height: 100vh;
   padding: 3rem 2rem;
   flex-direction: column;
-  border-right: 2px solid $grey;
-  background-color: $white;
+  background-color: $light-blue-2;
 
   @include respond-to(tablet) {
     position: fixed;
@@ -76,8 +75,6 @@ const NAVIGATION_CONFIG = [
     width: 100%;
     height: 9.3rem;
     padding: 1rem 2rem;
-    border-top: 2px solid $grey;
-    border-right: none;
   }
 }
 

@@ -45,7 +45,7 @@ const classList = computed(() => [
 .navLinkWrapper {
   display: flex;
   align-items: center;
-  border-radius: 3rem;
+  border-radius: 2.2rem;
   outline: 1px solid transparent;
 
   &._transparentBorder {
@@ -82,7 +82,7 @@ const classList = computed(() => [
     transition: outline 0.5s;
 
     &:hover {
-      outline: 1px solid $grey;
+      outline: 1px solid $dark-blue;
       cursor: pointer;
     }
   }
@@ -104,10 +104,11 @@ const classList = computed(() => [
 
 .navLink {
   display: flex;
-  gap: 1.4rem;
+  align-items: center;
+  gap: 1.8rem;
   width: 100%;
   height: 100%;
-  padding: 1.5rem;
+  padding: 1.1rem 2.5rem;
 
   .navImg {
     width: 2.4rem;
@@ -123,10 +124,10 @@ const classList = computed(() => [
   }
 
   .navTitle {
-    font-family: Geist, sans-serif;
     font-size: 1.8rem;
     font-weight: 600;
     line-height: 2.4rem;
+    white-space: nowrap;
 
     @include respond-to(mobile) {
       display: none;

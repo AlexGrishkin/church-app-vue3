@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -21,30 +20,17 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@pinia/nuxt',
     'dayjs-nuxt',
-    // 'nuxt-typed-router',
     'nuxt-file-storage',
     '@nuxt/eslint',
     'nuxt-typed-router',
+    'nuxt-swiper',
   ],
-  router: {
-    options: {
-      strict: true, // Включение строгого режима
-      sensitive: false, // Чувствительность к регистру
-    },
-  },
   families: [
     { name: 'montserrat', provider: 'google' },
     { name: 'geist', provider: 'google' },
   ],
   css: ['~/assets/scss/global.scss'],
   vite: {
-    plugins: [
-      createHtmlPlugin({
-        minify: {
-          removeComments: true, // Удаляет комментарии
-        },
-      }),
-    ],
     css: {
       preprocessorOptions: {
         scss: {
@@ -54,9 +40,6 @@ export default defineNuxtConfig({
         `,
         },
       },
-    },
-    esbuild: {
-      legalComments: 'none', // Удаляет все комментарии
     },
   },
 });
