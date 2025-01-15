@@ -1,3 +1,24 @@
+<template>
+  <ClientOnly>
+    <div :class="$style.swiperWrapper">
+      <swiper-container
+        ref="containerRef"
+        :navigation="true"
+        slides-per-view="3"
+        space-between="10"
+      >
+        <swiper-slide
+          v-for="(slide, idx) in slides"
+          :key="idx"
+          style="background-color: rgb(32 233 70); color: white"
+        >
+          Slide {{ idx + 1 }}
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </ClientOnly>
+</template>
+
 <script setup lang="ts">
 // Create 10 slides
 const containerRef = ref(null);
@@ -12,25 +33,11 @@ onMounted(() => {
 });
 </script>
 
-<template>
-  <ClientOnly>
-    <swiper-container ref="containerRef">
-      <swiper-slide
-        v-for="(slide, idx) in slides"
-        :key="idx"
-        style="background-color: rgb(32 233 70); color: white"
-      >
-        Slide {{ idx + 1 }}
-      </swiper-slide>
-    </swiper-container>
-  </ClientOnly>
+<style lang="scss" module>
+.swiperWrapper {
+  width: 100%;
+}
 
-  <!-- Go back one slide -->
-  <button @click="swiper.prev()">Prev</button>
-  <!-- Go forward one slide -->
-  <button @click="swiper.next()">Next</button>
-</template>
-<style lang="css">
 swiper-slide {
   display: flex;
   align-items: center;
@@ -38,7 +45,6 @@ swiper-slide {
   height: 20vh;
   font-family: Roboto, sans-serif;
   font-size: 18px;
-  font-size: 4rem;
   font-weight: bold;
 }
 </style>
