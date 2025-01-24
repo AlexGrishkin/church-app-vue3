@@ -1,11 +1,5 @@
 <template>
-  <div>
-    <h1>
-      Mainddddddddd dddddddddddddddddddddddd ddddddddddd ddddddddddddddddd
-      dddddddddddddddddddddddddddd ddddddddddddddddddddddddd dddddddddddddddddddddddd
-      dddddddddddddddddd dddddddddddddd ddddddddddddddddddddddd dddddccccccccccccccc
-      ccccccccccccccccccc ccccccccccccccc ccccccddd ddddddddddddddddd
-    </h1>
+  <div :class="$style.mainContentWrapper">
     <Calendy />
   </div>
 </template>
@@ -14,6 +8,13 @@
 import Calendy from '~/components/common/Calendy.vue';
 </script>
 <style lang="scss" module>
+.mainContentWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+
 h1 {
   @include Title;
 

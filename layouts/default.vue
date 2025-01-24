@@ -8,8 +8,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" module>
 .Container {
@@ -17,7 +16,7 @@
 }
 
 .mainContent {
-  width: 100%;
+  width: calc(100vw - 32rem);
 }
 
 .pageContainer {

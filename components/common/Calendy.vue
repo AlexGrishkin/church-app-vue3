@@ -1,15 +1,16 @@
 <template>
   <div :class="$style.calendyWrapper">
-    <Swiper />
+    <Scroller />
   </div>
 </template>
 
 <script setup lang="ts">
-import Swiper from '~/components/common/Swiper.vue';
+import Scroller from '~/components/common/Scroller.vue';
 </script>
 
 <style scoped lang="scss" module>
 .calendyWrapper {
   width: 42rem;
+  height: auto;
 }
 </style>

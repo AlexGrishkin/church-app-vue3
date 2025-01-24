@@ -23,7 +23,6 @@ export default defineNuxtConfig({
     'nuxt-file-storage',
     '@nuxt/eslint',
     'nuxt-typed-router',
-    'nuxt-swiper',
   ],
   families: [
     { name: 'montserrat', provider: 'google' },

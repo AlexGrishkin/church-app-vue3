@@ -2,7 +2,7 @@
   <div :class="[$style.navLinkWrapper, { [$style._activeLink]: isActiveLink }, classList]">
     <NuxtLink :href="linkData.link" :class="$style.navLink">
       <!--      возможно стоит сюда прикрутить модуль для иконок-->
-      <nuxt-img preload :class="$style.navImg" :src="linkData.imgSrc" />
+      <nuxt-img :class="$style.navImg" :src="linkData.imgSrc" />
       <p v-if="linkData.title" :class="$style.navTitle">{{ linkData.title }}</p>
     </NuxtLink>
   </div>
@@ -92,7 +92,8 @@ const classList = computed(() => [
 
     .navLink {
       .navImg {
-        filter: brightness(0) saturate(100%) invert(18%) sepia(28%) saturate(5170%) hue-rotate(199deg) brightness(99%) contrast(107%);
+        filter: brightness(0) saturate(100%) invert(18%) sepia(28%) saturate(5170%)
+          hue-rotate(199deg) brightness(99%) contrast(107%);
       }
     }
 
@@ -124,10 +125,10 @@ const classList = computed(() => [
   }
 
   .navTitle {
+    white-space: nowrap;
     font-size: 1.8rem;
     font-weight: 600;
     line-height: 2.4rem;
-    white-space: nowrap;
 
     @include respond-to(mobile) {
       display: none;

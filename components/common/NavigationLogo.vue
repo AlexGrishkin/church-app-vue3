@@ -8,12 +8,12 @@
 <style lang="scss" module>
 .logoWrapper {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-start;
   width: 100%;
   height: 8.4rem;
   margin-bottom: 5rem;
+  gap: 1rem;
 
   @include respond-to(desktop) {
     height: 6.4rem;
@@ -36,7 +36,7 @@
 
 .logoTitle {
   font-size: 3rem;
-  line-height: 3.4rem;
   font-weight: 700;
+  line-height: 3.4rem;
 }
 </style>
