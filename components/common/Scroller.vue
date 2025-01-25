@@ -1,12 +1,7 @@
 <template>
   <div :class="$style.scrollerContainer">
     <swiper
-      :modules="modules"
-      :slides-per-view="3"
-      :space-between="10"
-      navigation
-      :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }"
+      v-bind="swiperOptions"
       :class="$style.swiper"
       @swiper="onSwiper"
       @slide-change="onSlideChange"
@@ -31,11 +26,26 @@ import 'swiper/css/scrollbar';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
-const onSwiper = (swiper) => {
-  console.log('Swiper instance:', swiper);
+// Настройки Swiper
+const swiperOptions = {
+  modules,
+  slidesPerView: 3,
+  centeredSlides: true,
+  initialSlide: 1,
+  spaceBetween: 10,
+  navigation: true,
+  noSwiping: true,
 };
 
-const onSlideChange = () => {
+const swiperInstance = ref(null);
+const activeSlideIndex = ref(0);
+
+const onSwiper = (swiper) => {
+  swiperInstance.value = swiper;
+};
+
+const onSlideChange = (swiper) => {
+  activeSlideIndex.value = swiper.activeIndex;
   console.log('Slide changed!');
 };
 </script>
@@ -55,11 +65,15 @@ const onSlideChange = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  border: 2px solid blue;
+  border: 2px solid transparent;
   background: #fff;
   text-align: center;
   font-size: 18px;
+}
+
+:global(.swiper-slide-active) {
+  border-radius: 10px;
+  border: 2px solid blue;
 }
 
 .swiper-slide img {
