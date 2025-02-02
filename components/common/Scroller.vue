@@ -2,22 +2,22 @@
   <div :class="$style.scrollerContainer">
     <swiper
       v-bind="swiperOptions"
-      :class="$style.swiper"
+      ref="swiperRef"
+      :class="[$style.swiper, 'swiper-no-swiping']"
       @swiper="onSwiper"
       @slide-change="onSlideChange"
     >
-      <swiper-slide :class="$style['swiper-slide']">Slide 1</swiper-slide>
-      <swiper-slide :class="$style['swiper-slide']">Slide 2</swiper-slide>
-      <swiper-slide :class="$style['swiper-slide']">Slide 3</swiper-slide>
-      <swiper-slide :class="$style['swiper-slide']">Slide 4</swiper-slide>
-      <swiper-slide :class="$style['swiper-slide']">Slide 5</swiper-slide>
+      <template v-if="slidesLoaded">
+        <slot />
+      </template>
     </swiper>
   </div>
 </template>
-<script setup>
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
-import { Swiper, SwiperSlide } from 'swiper/vue';
+<script setup>
+import { ref, nextTick, onMounted } from 'vue';
+import { Swiper } from 'swiper/vue';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -26,7 +26,6 @@ import 'swiper/css/scrollbar';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
-// Настройки Swiper
 const swiperOptions = {
   modules,
   slidesPerView: 3,
@@ -35,19 +34,27 @@ const swiperOptions = {
   spaceBetween: 10,
   navigation: true,
   noSwiping: true,
+  noSwipingClass: 'swiper-no-swiping',
 };
 
-const swiperInstance = ref(null);
+const swiperRef = ref(null);
 const activeSlideIndex = ref(0);
+const slidesLoaded = ref(false);
 
 const onSwiper = (swiper) => {
-  swiperInstance.value = swiper;
+  swiperRef.value = swiper;
 };
 
 const onSlideChange = (swiper) => {
   activeSlideIndex.value = swiper.activeIndex;
-  console.log('Slide changed!');
+  console.log('Slide changed!', swiper.activeIndex);
 };
+
+// до завершения рендеринга свайпер выдавал ошибку слотов и не мог найти слайды
+onMounted(async () => {
+  await nextTick(); // Ждем, пока Vue завершит рендеринг
+  slidesLoaded.value = true;
+});
 </script>
 
 <style lang="scss" module>
@@ -59,21 +66,6 @@ const onSlideChange = (swiper) => {
 .swiper {
   width: 100%;
   height: 100%;
-}
-
-.swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid transparent;
-  background: #fff;
-  text-align: center;
-  font-size: 18px;
-}
-
-:global(.swiper-slide-active) {
-  border-radius: 10px;
-  border: 2px solid blue;
 }
 
 .swiper-slide img {
