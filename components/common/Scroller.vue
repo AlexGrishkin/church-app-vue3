@@ -35,6 +35,8 @@ const swiperOptions = {
   navigation: true,
   noSwiping: true,
   noSwipingClass: 'swiper-no-swiping',
+  injectStyles: false,
+  loop: true,
 };
 
 const swiperRef = ref(null);
@@ -66,6 +68,10 @@ onMounted(async () => {
 .swiper {
   width: 100%;
   height: 100%;
+}
+
+:global(.swiper-wrapper) {
+  justify-content: space-between;
 }
 
 .swiper-slide img {
