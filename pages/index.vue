@@ -11,7 +11,7 @@ const calendyData = [
   {
     date: '02 января',
     weekDay: 'воскресенье',
-    event: [
+    events: [
       {
         name: 'Служба',
         description: 'Собираемся на службу',
@@ -29,15 +29,27 @@ const calendyData = [
   {
     date: '03 января',
     weekDay: 'понедельник',
-    event: [
+    events: [
       {
-        name: 'Служба',
+        name: 'Служба3',
         description: 'Собираемся на службу',
         timeStart: '9:00',
         timeEnd: '11:00',
       },
       {
-        name: 'Служба2',
+        name: 'Служба4',
+        description: 'Собираемся на службу2',
+        timeStart: '10:00',
+        timeEnd: '12:00',
+      },
+      {
+        name: 'Служба44',
+        description: 'Собираемся на службу2',
+        timeStart: '10:00',
+        timeEnd: '12:00',
+      },
+      {
+        name: 'Служба45',
         description: 'Собираемся на службу2',
         timeStart: '10:00',
         timeEnd: '12:00',
@@ -47,15 +59,15 @@ const calendyData = [
   {
     date: '04 января',
     weekDay: 'вторник',
-    event: [
+    events: [
       {
-        name: 'Служба',
+        name: 'Служба5',
         description: 'Собираемся на службу',
         timeStart: '9:00',
         timeEnd: '11:00',
       },
       {
-        name: 'Служба2',
+        name: 'Служба6',
         description: 'Собираемся на службу2',
         timeStart: '10:00',
         timeEnd: '12:00',
@@ -65,15 +77,15 @@ const calendyData = [
   {
     date: '05 января',
     weekDay: 'среда',
-    event: [
+    events: [
       {
-        name: 'Служба',
+        name: 'Служба7',
         description: 'Собираемся на службу',
         timeStart: '9:00',
         timeEnd: '11:00',
       },
       {
-        name: 'Служба2',
+        name: 'Служба8',
         description: 'Собираемся на службу2',
         timeStart: '10:00',
         timeEnd: '12:00',
@@ -83,15 +95,15 @@ const calendyData = [
   {
     date: '06 января',
     weekDay: 'четверг',
-    event: [
+    events: [
       {
-        name: 'Служба',
+        name: 'Служба9',
         description: 'Собираемся на службу',
         timeStart: '9:00',
         timeEnd: '11:00',
       },
       {
-        name: 'Служба2',
+        name: 'Служба10',
         description: 'Собираемся на службу2',
         timeStart: '10:00',
         timeEnd: '12:00',
@@ -101,15 +113,15 @@ const calendyData = [
   {
     date: '07 января',
     weekDay: 'пятница',
-    event: [
+    events: [
       {
-        name: 'Служба',
+        name: 'Служба11',
         description: 'Собираемся на службу',
         timeStart: '9:00',
         timeEnd: '11:00',
       },
       {
-        name: 'Служба2',
+        name: 'Служба12',
         description: 'Собираемся на службу2',
         timeStart: '10:00',
         timeEnd: '12:00',
@@ -119,15 +131,15 @@ const calendyData = [
   {
     date: '08 января',
     weekDay: 'суббота',
-    event: [
+    events: [
       {
-        name: 'Служба',
+        name: 'Служба13',
         description: 'Собираемся на службу',
         timeStart: '9:00',
         timeEnd: '11:00',
       },
       {
-        name: 'Служба2',
+        name: 'Служба14',
         description: 'Собираемся на службу2',
         timeStart: '10:00',
         timeEnd: '12:00',

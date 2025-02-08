@@ -1,19 +1,23 @@
 <template>
   <div :class="$style.calendyWrapper">
-    <Scroller>
-      <template v-if="slides.length > 0">
+    <Scroller @slide-changed="onSlideChanged">
+      <template v-if="calendyData.length > 0">
         <swiper-slide v-for="(slide, index) in calendyData" :key="index">
           <p>{{ slide.date }}</p>
           <p>{{ slide.weekDay }}</p>
         </swiper-slide>
       </template>
     </Scroller>
+    <div :class="$style.eventsWrapper">
+      <EventCard v-for="(event, index) in getActiveEvents" :key="index" :event-data="event" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Scroller from '~/components/common/Scroller.vue';
 import { SwiperSlide } from 'swiper/vue';
+import EventCard from '~/components/common/EventCard.vue';
 
 interface EventProps {
   name: string;
@@ -35,13 +39,30 @@ const props = defineProps({
   },
 });
 
-const slides = ref(['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']);
+const activeIndex = ref(1);
+
+const getActiveEvents = computed(() => {
+  return props.calendyData[activeIndex.value]?.events || [];
+});
+
+const onSlideChanged = (index: number) => {
+  activeIndex.value = index;
+  console.log('Текущий слайд:', index);
+};
 </script>
 
 <style scoped lang="scss" module>
 .calendyWrapper {
-  width: 35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: auto;
+  max-width: 42rem;
   height: auto;
+  min-height: 50rem;
+  padding: 2rem 0.9rem;
+  box-shadow: 2px 2px 5px 4px rgb(153 155 168 / 15%);
+  border-radius: 1.2rem;
 }
 
 :global(.swiper-slide) {
@@ -50,8 +71,6 @@ const slides = ref(['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']);
   justify-content: center;
   max-width: 105px;
   padding: 12px;
-  border: 2px solid transparent;
-  background: #fff;
   text-align: center;
   font-size: 12px;
   flex-direction: column;
@@ -61,5 +80,11 @@ const slides = ref(['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']);
 :global(.swiper-slide-active) {
   border-radius: 10px;
   border: 2px solid $dark-blue;
+}
+
+.eventsWrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 </style>

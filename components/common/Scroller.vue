@@ -11,6 +11,8 @@
         <slot />
       </template>
     </swiper>
+    <div :class="[$style.swiperButton, 'swiper__button_prev']"><ArrowButton /></div>
+    <div :class="[$style.swiperButton, 'swiper__button_next']"><ArrowButton rotate="right" /></div>
   </div>
 </template>
 
@@ -23,20 +25,25 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import ArrowButton from '~/components/UI/ArrowButton.vue';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
+const emit = defineEmits(['slideChanged']);
+
 const swiperOptions = {
   modules,
-  slidesPerView: 3,
+  slidesPerView: 'auto',
   centeredSlides: true,
   initialSlide: 1,
   spaceBetween: 10,
-  navigation: true,
+  navigation: {
+    nextEl: '.swiper__button_next',
+    prevEl: '.swiper__button_prev',
+  },
   noSwiping: true,
   noSwipingClass: 'swiper-no-swiping',
   injectStyles: false,
-  loop: true,
 };
 
 const swiperRef = ref(null);
@@ -49,6 +56,7 @@ const onSwiper = (swiper) => {
 
 const onSlideChange = (swiper) => {
   activeSlideIndex.value = swiper.activeIndex;
+  emit('slideChanged', swiper.activeIndex);
   console.log('Slide changed!', swiper.activeIndex);
 };
 
@@ -61,8 +69,13 @@ onMounted(async () => {
 
 <style lang="scss" module>
 .scrollerContainer {
+  position: relative;
   width: 100%;
+  max-width: 35rem;
   height: 100%;
+  max-height: 6.6rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
 }
 
 .swiper {
@@ -79,5 +92,25 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.swiperButton {
+  position: absolute;
+  top: calc(50% - 20px);
+  z-index: 1;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  cursor: pointer;
+  place-items: center;
+}
+
+:global(.swiper__button_prev) {
+  left: -3rem;
+}
+
+:global(.swiper__button_next) {
+  right: -3rem;
 }
 </style>
