@@ -2,6 +2,20 @@
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://84.38.180.101:8080',
+    },
+  },
+  nitro: {
+    devProxy: {
+      '/api/': {
+        target: 'http://84.38.180.101:8080',
+        changeOrigin: true,
+        pathRewrite: { '^/api/': '' },
+      },
+    },
+  },
   devtools: { enabled: true },
   ssr: true, // Убедитесь, что SSR включен
   vue: {

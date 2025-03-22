@@ -15,6 +15,11 @@ $breakpoints: (
   letter-spacing: -.0.03em;
 }
 
+@mixin textSmall {
+  font-size: 12px;
+  line-height: 16px;
+}
+
 @mixin respond-to($name) {
   $max: map-get($breakpoints, $name);
 

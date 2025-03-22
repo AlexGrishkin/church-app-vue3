@@ -1,165 +1,73 @@
 <template>
   <div :class="$style.mainContentWrapper">
-    <Calendy :calendy-data="calendyData" />
+    <h1 :class="$style.mainContentTitle">Календарь</h1>
+    <Calendy :calendy-data="eventsData" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Calendy from '~/components/common/Calendy.vue';
 
-const calendyData = [
-  {
-    date: '02 января',
-    weekDay: 'воскресенье',
-    events: [
-      {
-        name: 'Служба',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба2',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-  {
-    date: '03 января',
-    weekDay: 'понедельник',
-    events: [
-      {
-        name: 'Служба3',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба4',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-      {
-        name: 'Служба44',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-      {
-        name: 'Служба45',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-  {
-    date: '04 января',
-    weekDay: 'вторник',
-    events: [
-      {
-        name: 'Служба5',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба6',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-  {
-    date: '05 января',
-    weekDay: 'среда',
-    events: [
-      {
-        name: 'Служба7',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба8',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-  {
-    date: '06 января',
-    weekDay: 'четверг',
-    events: [
-      {
-        name: 'Служба9',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба10',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-  {
-    date: '07 января',
-    weekDay: 'пятница',
-    events: [
-      {
-        name: 'Служба11',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба12',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-  {
-    date: '08 января',
-    weekDay: 'суббота',
-    events: [
-      {
-        name: 'Служба13',
-        description: 'Собираемся на службу',
-        timeStart: '9:00',
-        timeEnd: '11:00',
-      },
-      {
-        name: 'Служба14',
-        description: 'Собираемся на службу2',
-        timeStart: '10:00',
-        timeEnd: '12:00',
-      },
-    ],
-  },
-];
+const eventsData = ref([]); // Массив для хранения данных
+
+const getEvents = async () => {
+  try {
+    const res = await $fetch('api/events');
+    // Функция для получения дня недели
+    const getDayOfWeek = (dateStr) => {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('ru-RU', { weekday: 'long' });
+    };
+
+    // Функция для форматирования числа и месяца
+    const getFormattedDate = (dateStr) => {
+      const date = new Date(dateStr);
+
+      return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    };
+
+    // Группируем события по дням
+    const groupedEvents = res.reduce((acc, event) => {
+      const weekDay = getDayOfWeek(event.date);
+      const formattedDate = getFormattedDate(event.date);
+
+      // Ищем или создаем запись для конкретного дня
+      const dayEntry = acc.find((entry) => entry.date === formattedDate);
+      if (dayEntry) {
+        dayEntry.events.push(event);
+      } else {
+        acc.push({
+          weekDay,
+          date: formattedDate,
+          events: [event],
+        });
+      }
+
+      return acc;
+    }, []);
+
+    eventsData.value = groupedEvents; // Присваиваем данные в ref
+
+    // eventsData.value = groupedEvents;
+  } catch (error) {
+    console.error('Ошибка при загрузке событий:', error);
+  }
+};
+
+onMounted(() => {
+  getEvents();
+});
 </script>
 <style lang="scss" module>
 .mainContentWrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
   width: 100%;
 }
 
-h1 {
-  @include Title;
-
+.mainContentTitle {
+  margin-bottom: 2rem;
   white-space: normal;
   color: $primary;
+
+  @include Title;
 }
 </style>

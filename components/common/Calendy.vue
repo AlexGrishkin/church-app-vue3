@@ -3,8 +3,8 @@
     <Scroller @slide-changed="onSlideChanged">
       <template v-if="calendyData.length > 0">
         <swiper-slide v-for="(slide, index) in calendyData" :key="index">
-          <p>{{ slide.date }}</p>
-          <p>{{ slide.weekDay }}</p>
+          <p :class="$style.calendyData">{{ slide.date }}</p>
+          <p :class="$style.calendyWeekDay">{{ slide.weekDay }}</p>
         </swiper-slide>
       </template>
     </Scroller>
@@ -47,7 +47,6 @@ const getActiveEvents = computed(() => {
 
 const onSlideChanged = (index: number) => {
   activeIndex.value = index;
-  console.log('Текущий слайд:', index);
 };
 </script>
 
@@ -56,13 +55,21 @@ const onSlideChanged = (index: number) => {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  width: auto;
-  max-width: 42rem;
+  width: 42rem;
   height: auto;
   min-height: 50rem;
   padding: 2rem 0.9rem;
   box-shadow: 2px 2px 5px 4px rgb(153 155 168 / 15%);
   border-radius: 1.2rem;
+
+  .calendyData {
+    font-weight: 600;
+  }
+
+  .calendyWeekDay {
+    text-transform: capitalize;
+    color: $dark-grey;
+  }
 }
 
 :global(.swiper-slide) {
@@ -78,8 +85,8 @@ const onSlideChanged = (index: number) => {
 }
 
 :global(.swiper-slide-active) {
-  border-radius: 10px;
-  border: 2px solid $dark-blue;
+  border-radius: 20px;
+  border: 1px solid $dark-blue;
 }
 
 .eventsWrapper {

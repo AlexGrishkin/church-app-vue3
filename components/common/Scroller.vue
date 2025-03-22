@@ -57,7 +57,6 @@ const onSwiper = (swiper) => {
 const onSlideChange = (swiper) => {
   activeSlideIndex.value = swiper.activeIndex;
   emit('slideChanged', swiper.activeIndex);
-  console.log('Slide changed!', swiper.activeIndex);
 };
 
 // до завершения рендеринга свайпер выдавал ошибку слотов и не мог найти слайды
